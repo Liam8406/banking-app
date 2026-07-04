@@ -21,8 +21,8 @@ public class LoginFragment extends Fragment {
         binding.goRegisterBtn.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(R.id.toRegister));
 
-        //binding.loginBtn.setOnClickListener(v ->
-                //Navigation.findNavController(v).navigate(R.id.homeFragment));
+        binding.loginBtn.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.toHome));
 
         return binding.getRoot();
     }

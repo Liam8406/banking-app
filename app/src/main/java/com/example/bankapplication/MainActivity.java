@@ -1,6 +1,7 @@
 package com.example.bankapplication;
 
 import android.os.Bundle;
+import com.google.firebase.FirebaseApp;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host);
-        
+        FirebaseApp.initializeApp(this);
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();
 
