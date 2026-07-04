@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center"
@@ -14,7 +15,7 @@
         android:textColor="#16A34A"
         android:layout_marginBottom="6dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:text="Send money between accounts"
@@ -22,37 +23,41 @@
         android:textColor="#6B7280"
         android:layout_marginBottom="24dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:orientation="vertical"
         android:background="#FFFFFF"
         android:padding="16dp"
+        android:elevation="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:text="Recipient Account"
             android:textColor="#374151"
+            android:textStyle="bold"
             android:layout_marginBottom="6dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/toAccountEt"
-            android:hint="Enter account ID"
+            android:hint="Enter account ID or email"
             android:padding="12dp"
             android:background="#F3F4F6"
+            android:singleLine="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             android:text="Amount"
             android:textColor="#374151"
+            android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="6dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/amountEt"
@@ -60,17 +65,31 @@
             android:inputType="numberDecimal"
             android:padding="12dp"
             android:background="#F3F4F6"
+            android:singleLine="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
+            android:id="@+id/messageTv"
+            android:text=""
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/transferBtn"
             android:text="Send Money"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:background="#16A34A"
-            android:layout_marginTop="20dp"
+            android:backgroundTint="#16A34A"
+            android:layout_marginTop="18dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:cornerRadius="12dp" />
+
     </LinearLayout>
+
 </LinearLayout>
