@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Welcome Back"
+        android:text="Create Account"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="#16A34A"
@@ -16,9 +16,18 @@
         android:layout_height="wrap_content"/>
 
     <EditText
+        android:id="@+id/nameEt"
+        android:hint="Full Name"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
         android:id="@+id/emailEt"
         android:hint="Email"
         android:padding="12dp"
+        android:layout_marginTop="12dp"
         android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -34,16 +43,16 @@
         android:layout_height="wrap_content"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginBtn"
-        android:text="Login"
+        android:id="@+id/registerBtn"
+        android:text="Register"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#16A34A"/>
 
     <TextView
-        android:id="@+id/goRegisterBtn"
-        android:text="Create account"
+        android:id="@+id/goLoginBtn"
+        android:text="Already have account?"
         android:textColor="#16A34A"
         android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
