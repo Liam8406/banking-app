@@ -38,12 +38,19 @@ public class RegisterFragment extends Fragment {
             String password = binding.passwordEt.getText().toString().trim();
 
             if (name.isEmpty() || id.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
+                Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (password.length() < 6) {
+                Toast.makeText(getContext(), "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener(result -> {
 
+                        if (auth.getCurrentUser() == null) return;
                         String uid = auth.getCurrentUser().getUid();
 
                         User user = new User(
@@ -58,9 +65,19 @@ public class RegisterFragment extends Fragment {
                         db.collection("users")
                                 .document(uid)
                                 .set(user)
-                                .addOnSuccessListener(unused ->
-                                        Navigation.findNavController(v).navigate(R.id.toLogin)
-                                );
+                                .addOnSuccessListener(unused -> {
+                                    if (binding == null) return;
+                                    Toast.makeText(getContext(), "Account created!", Toast.LENGTH_SHORT).show();
+                                    Navigation.findNavController(v).navigate(R.id.toLogin);
+                                })
+                                .addOnFailureListener(e -> {
+                                    if (getContext() == null) return;
+                                    Toast.makeText(getContext(), "Failed to save user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                    })
+                    .addOnFailureListener(e -> {
+                        if (getContext() == null) return;
+                        Toast.makeText(getContext(), "Registration failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
 
@@ -68,5 +85,11 @@ public class RegisterFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.toLogin));
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

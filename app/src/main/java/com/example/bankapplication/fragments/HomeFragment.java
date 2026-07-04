@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.example.bankapplication.R;
@@ -28,6 +30,11 @@ public class HomeFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        if (auth.getCurrentUser() == null) {
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.loginFragment);
+            return binding.getRoot();
+        }
+
         String uid = auth.getCurrentUser().getUid();
 
         db.collection("users")
@@ -35,19 +42,40 @@ public class HomeFragment extends Fragment {
                 .get()
                 .addOnSuccessListener(doc -> {
 
-                    User user = doc.toObject(User.class);
+                    if (binding == null) return;
 
+                    if (!doc.exists()) {
+                        Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    User user = doc.toObject(User.class);
                     if (user == null) return;
 
                     binding.titleTv.setText("Hello " + user.getName());
                     binding.balanceTv.setText("₪" + user.getBalance());
+                })
+                .addOnFailureListener(e -> {
+                    if (binding == null || getContext() == null) return;
+                    Toast.makeText(getContext(), "Failed to load user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
 
         binding.logoutBtn.setOnClickListener(v -> {
             auth.signOut();
-            Navigation.findNavController(v).navigate(R.id.loginFragment);
+
+            NavOptions navOptions = new NavOptions.Builder()
+                    .setPopUpTo(R.id.homeFragment, true)
+                    .build();
+
+            Navigation.findNavController(v).navigate(R.id.loginFragment, null, navOptions);
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
