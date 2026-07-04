@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -39,30 +41,27 @@ public class RegisterFragment extends Fragment {
                 return;
             }
 
-            if (!email.contains("@")) {
-                return;
-            }
-
-            if (phone.length() < 9) {
-                return;
-            }
-
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener(result -> {
 
-                        if (auth.getCurrentUser() == null) return;
-
                         String uid = auth.getCurrentUser().getUid();
 
-                        User user = new User(uid, name, email, phone, 1000);
+                        User user = new User(
+                                uid,
+                                id,
+                                name,
+                                email,
+                                phone,
+                                1000
+                        );
 
                         db.collection("users")
                                 .document(uid)
                                 .set(user)
                                 .addOnSuccessListener(unused ->
-                                        Navigation.findNavController(v).navigate(R.id.toLogin));
-                    })
-                    .addOnFailureListener(e -> e.printStackTrace());
+                                        Navigation.findNavController(v).navigate(R.id.toLogin)
+                                );
+                    });
         });
 
         binding.goLoginBtn.setOnClickListener(v ->

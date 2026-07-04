@@ -7,16 +7,16 @@
 
     <TextView
         android:id="@+id/titleTv"
-        android:text="My Balance"
-        android:textSize="22sp"
-        android:textColor="#16A34A"
+        android:text="Hello"
+        android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="#16A34A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="80dp"/>
 
     <TextView
         android:id="@+id/balanceTv"
@@ -27,34 +27,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/titleTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logoutBtn"
+        android:text="Logout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#EF4444"
+        android:layout_margin="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/transferBtn"
-        android:text="Transfer Money"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#16A34A"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="12dp"
-        app:layout_constraintBottom_toTopOf="@id/adminBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="24dp"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/adminBtn"
-        android:text="Admin Panel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#22C55E"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="24dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
